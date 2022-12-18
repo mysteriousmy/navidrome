@@ -162,6 +162,10 @@
     },
     "ra": {
         "auth": {
+            "signUser": "Sign In User",
+            "loginUser": "Login User",
+            "uploadMusic": "Upload Music",
+            "downloadClient": "Down Client",
             "welcome1": "Thanks for installing Navidrome!",
             "welcome2": "To start, create an admin user",
             "confirmPassword": "Confirm Password",
@@ -172,7 +176,8 @@
             "password": "Password",
             "sign_in": "Sign in",
             "sign_in_error": "Authentication failed, please retry",
-            "logout": "Logout"
+            "logout": "Logout",
+            "buttonRegisterUser": "Sign Up"
         },
         "validation": {
             "invalidChars": "Please only use letter and numbers",

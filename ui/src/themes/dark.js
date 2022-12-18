@@ -1,13 +1,13 @@
 import blue from '@material-ui/core/colors/blue'
 
 export default {
-  themeName: 'Dark',
+  themeName: '默认主题',
   palette: {
     primary: {
       main: '#90caf9',
     },
     secondary: blue,
-    type: 'dark',
+    type: 'light',
   },
   overrides: {
     MuiFormGroup: {

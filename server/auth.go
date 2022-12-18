@@ -48,18 +48,18 @@ func login(ds model.DataStore) func(w http.ResponseWriter, r *http.Request) {
 func doLogin(ds model.DataStore, username string, password string, w http.ResponseWriter, r *http.Request) {
 	user, err := validateLogin(ds.User(r.Context()), username, password)
 	if err != nil {
-		_ = rest.RespondWithError(w, http.StatusInternalServerError, "Unknown error authentication user. Please try again")
+		_ = rest.RespondWithError(w, http.StatusInternalServerError, "服务器错误，无法验证用户身份，请联系管理员")
 		return
 	}
 	if user == nil {
 		log.Warn(r, "Unsuccessful login", "username", username, "request", r.Header)
-		_ = rest.RespondWithError(w, http.StatusUnauthorized, "Invalid username or password")
+		_ = rest.RespondWithError(w, http.StatusUnauthorized, "用户名或密码错误！")
 		return
 	}
 
 	tokenString, err := auth.CreateToken(user)
 	if err != nil {
-		_ = rest.RespondWithError(w, http.StatusInternalServerError, "Unknown error authenticating user. Please try again")
+		_ = rest.RespondWithError(w, http.StatusInternalServerError, "服务器错误，无法验证用户身份，请联系管理员")
 		return
 	}
 	payload := buildAuthPayload(user)
@@ -132,6 +132,50 @@ func createAdmin(ds model.DataStore) func(w http.ResponseWriter, r *http.Request
 		}
 		doLogin(ds, username, password, w, r)
 	}
+}
+func createUser(ds model.DataStore) func(w http.ResponseWriter, r *http.Request) {
+	return func(w http.ResponseWriter, r *http.Request) {
+		username, password, err := getCredentialsFromBody(r)
+		if err != nil {
+			log.Error(r, "parsing request body", err)
+			_ = rest.RespondWithError(w, http.StatusUnprocessableEntity, err.Error())
+			return
+		}
+		c, err := ds.User(r.Context()).FindByUsernameCount(username)
+		if err != nil {
+			_ = rest.RespondWithError(w, http.StatusInternalServerError, "服务器错误，请联系管理员！")
+			return
+		}
+		if c > 0 {
+			_ = rest.RespondWithError(w, http.StatusForbidden, "不能创建该用户，因为该用户已存在！")
+			return
+		}
+		err = createNormalUser(r.Context(), ds, username, password)
+		if err != nil {
+			_ = rest.RespondWithError(w, http.StatusInternalServerError, "服务器错误，请联系管理员！")
+			return
+		}
+		doLogin(ds, username, password, w, r)
+	}
+}
+func createNormalUser(ctx context.Context, ds model.DataStore, username, password string) error {
+	log.Warn(ctx, "Creating Normal user", "user", username)
+	now := time.Now()
+	caser := cases.Title(language.Und)
+	normalUser := model.User{
+		ID:          uuid.NewString(),
+		UserName:    username,
+		Name:        caser.String(username),
+		Email:       "",
+		NewPassword: password,
+		IsAdmin:     false,
+		LastLoginAt: now,
+	}
+	err := ds.User(ctx).Put(&normalUser)
+	if err != nil {
+		log.Error(ctx, "Could not create normal user", "user", normalUser, err)
+	}
+	return nil
 }
 
 func createAdminUser(ctx context.Context, ds model.DataStore, username, password string) error {
@@ -245,7 +289,7 @@ func Authenticator(ds model.DataStore) func(next http.Handler) http.Handler {
 		return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 			ctx, err := authenticateRequest(ds, r, UsernameFromConfig, UsernameFromToken, UsernameFromReverseProxyHeader)
 			if err != nil {
-				_ = rest.RespondWithError(w, http.StatusUnauthorized, "Not authenticated")
+				_ = rest.RespondWithError(w, http.StatusUnauthorized, "没有登录验证")
 				return
 			}
 
@@ -266,7 +310,7 @@ func JWTRefresher(next http.Handler) http.Handler {
 		newTokenString, err := auth.TouchToken(token)
 		if err != nil {
 			log.Error(r, "Could not sign new token", err)
-			_ = rest.RespondWithError(w, http.StatusUnauthorized, "Not authenticated")
+			_ = rest.RespondWithError(w, http.StatusUnauthorized, "没有登陆验证")
 			return
 		}
 

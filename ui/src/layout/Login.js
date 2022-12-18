@@ -2,6 +2,7 @@ import React, { useState, useCallback, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { Field, Form } from 'react-final-form'
 import { useDispatch } from 'react-redux'
+import MainLogo from '../icons/mainlogo.png'
 import Button from '@material-ui/core/Button'
 import Card from '@material-ui/core/Card'
 import CardActions from '@material-ui/core/CardActions'
@@ -99,20 +100,39 @@ const renderInput = ({
   />
 )
 
-const FormLogin = ({ loading, handleSubmit, validate }) => {
+const FormLogin = ({
+  loading,
+  handleSubmit,
+  validate,
+  isLogin,
+  handleChangeLogin,
+}) => {
   const translate = useTranslate()
   const classes = useStyles()
-
   return (
     <Form
       onSubmit={handleSubmit}
       validate={validate}
       render={({ handleSubmit }) => (
-        <form onSubmit={handleSubmit} noValidate>
+        <form
+          style={{ display: isLogin ? 'block' : 'none' }}
+          onSubmit={handleSubmit}
+          noValidate
+        >
           <div className={classes.main}>
             <Card className={classes.card}>
-              <div className={classes.avatar}>
-                <img src={Logo} className={classes.icon} alt={'logo'} />
+              <div
+                style={{
+                  display: 'flex',
+                  marginTop: '3em',
+                  justifyContent: 'center',
+                }}
+              >
+                <img
+                  src={MainLogo}
+                  style={{ backgroundColor: 'transparent', width: 220 }}
+                  alt={'logo'}
+                />
               </div>
               <div className={classes.systemName}>
                 <a
@@ -121,7 +141,7 @@ const FormLogin = ({ loading, handleSubmit, validate }) => {
                   rel="noopener noreferrer"
                   className={classes.systemNameLink}
                 >
-                  Navidrome
+                  源音云
                 </a>
               </div>
               {config.welcomeMessage && (
@@ -162,6 +182,43 @@ const FormLogin = ({ loading, handleSubmit, validate }) => {
                   {loading && <CircularProgress size={25} thickness={2} />}
                   {translate('ra.auth.sign_in')}
                 </Button>
+                <Button
+                  variant="contained"
+                  type="button"
+                  onClick={() => handleChangeLogin(false)}
+                  color="primary"
+                  disabled={loading}
+                  className={classes.button}
+                  fullWidth
+                >
+                  {translate('ra.auth.signUser')}
+                </Button>
+              </CardActions>
+              <CardActions className={classes.actions}>
+                <Button
+                  variant="contained"
+                  type="button"
+                  onClick={() => (window.window.href = 'http://musicup.hy.com')}
+                  color="primary"
+                  disabled={loading}
+                  className={classes.button}
+                  fullWidth
+                >
+                  {translate('ra.auth.uploadMusic')}
+                </Button>
+                <Button
+                  variant="contained"
+                  type="button"
+                  onClick={() =>
+                    (window.location.href = 'http://musicup.hy.com/源音云.exe')
+                  }
+                  color="primary"
+                  disabled={loading}
+                  className={classes.button}
+                  fullWidth
+                >
+                  {translate('ra.auth.downloadClient')}
+                </Button>
               </CardActions>
             </Card>
             <Notification />
@@ -171,7 +228,143 @@ const FormLogin = ({ loading, handleSubmit, validate }) => {
     />
   )
 }
-
+const FormRegisterUp = ({
+  loading,
+  handleSubmit,
+  validate,
+  isLogin,
+  handleChangeLogin,
+}) => {
+  const translate = useTranslate()
+  const classes = useStyles()
+  return (
+    <Form
+      onSubmit={handleSubmit}
+      validate={validate}
+      render={({ handleSubmit }) => (
+        <form
+          style={{ display: isLogin ? 'none' : 'block' }}
+          onSubmit={handleSubmit}
+          noValidate
+        >
+          <div className={classes.main}>
+            <Card className={classes.card}>
+              <div
+                style={{
+                  display: 'flex',
+                  marginTop: '3em',
+                  justifyContent: 'center',
+                }}
+              >
+                <img
+                  src={MainLogo}
+                  style={{ backgroundColor: 'transparent', width: 220 }}
+                  alt={'logo'}
+                />
+              </div>
+              <div className={classes.welcome}>{'欢迎使用源音云！'}</div>
+              <div className={classes.welcome}>
+                {'注册一个账户，享受所有服务'}
+              </div>
+              <div className={classes.form}>
+                <div className={classes.input}>
+                  <Field
+                    autoFocus
+                    name="username"
+                    component={renderInput}
+                    label={translate('ra.auth.username')}
+                    disabled={loading}
+                  />
+                </div>
+                <div className={classes.input}>
+                  <Field
+                    name="password"
+                    component={renderInput}
+                    label={translate('ra.auth.password')}
+                    type="password"
+                    disabled={loading}
+                  />
+                </div>
+                <div className={classes.input}>
+                  <Field
+                    name="confirmPassword"
+                    component={renderInput}
+                    label={translate('ra.auth.confirmPassword')}
+                    type="password"
+                    disabled={loading}
+                  />
+                </div>
+                <div className={classes.input}>
+                  <Field
+                    name="urls"
+                    component={renderInput}
+                    style={{ display: 'none' }}
+                    defaultValue="/auth/createNormalUser"
+                    type="password"
+                    disabled={loading}
+                  />
+                </div>
+              </div>
+              <CardActions className={classes.actions}>
+                <Button
+                  variant="contained"
+                  type="submit"
+                  color="primary"
+                  disabled={loading}
+                  className={classes.button}
+                  fullWidth
+                >
+                  {loading && <CircularProgress size={25} thickness={2} />}
+                  {translate('ra.auth.buttonRegisterUser')}
+                </Button>
+                <Button
+                  variant="contained"
+                  type="button"
+                  onClick={() => handleChangeLogin(true)}
+                  color="primary"
+                  disabled={loading}
+                  className={classes.button}
+                  fullWidth
+                >
+                  {translate('ra.auth.loginUser')}
+                </Button>
+              </CardActions>
+              <CardActions className={classes.actions}>
+                <Button
+                  variant="contained"
+                  type="button"
+                  onClick={() =>
+                    (window.location.href = 'http://musicup.hy.com')
+                  }
+                  color="primary"
+                  disabled={loading}
+                  className={classes.button}
+                  fullWidth
+                >
+                  {translate('ra.auth.uploadMusic')}
+                </Button>
+                <Button
+                  variant="contained"
+                  type="button"
+                  onClick={() =>
+                    (window.location.href = 'http://musicup.hy.com/源音云.exe')
+                  }
+                  color="primary"
+                  disabled={loading}
+                  className={classes.button}
+                  fullWidth
+                >
+                  {translate('ra.auth.downloadClient')}
+                </Button>
+              </CardActions>
+            </Card>
+            <Notification />
+          </div>
+        </form>
+      )}
+    />
+  )
+}
 const FormSignUp = ({ loading, handleSubmit, validate }) => {
   const translate = useTranslate()
   const classes = useStyles()
@@ -184,8 +377,18 @@ const FormSignUp = ({ loading, handleSubmit, validate }) => {
         <form onSubmit={handleSubmit} noValidate>
           <div className={classes.main}>
             <Card className={classes.card}>
-              <div className={classes.avatar}>
-                <img src={Logo} className={classes.icon} alt={'logo'} />
+              <div
+                style={{
+                  display: 'flex',
+                  marginTop: '3em',
+                  justifyContent: 'center',
+                }}
+              >
+                <img
+                  src={MainLogo}
+                  style={{ backgroundColor: 'transparent', width: 220 }}
+                  alt={'logo'}
+                />
               </div>
               <div className={classes.welcome}>
                 {translate('ra.auth.welcome1')}
@@ -245,11 +448,14 @@ const FormSignUp = ({ loading, handleSubmit, validate }) => {
 }
 const Login = ({ location }) => {
   const [loading, setLoading] = useState(false)
+  const [isLogin, setLoginState] = useState(true)
   const translate = useTranslate()
   const notify = useNotify()
   const login = useLogin()
   const dispatch = useDispatch()
-
+  const handleChangeLogin = (prop = true) => {
+    setLoginState(prop)
+  }
   const handleSubmit = useCallback(
     (auth) => {
       setLoading(true)
@@ -302,7 +508,7 @@ const Login = ({ location }) => {
     },
     [translate, validateLogin]
   )
-
+  console.log(isLogin, loading)
   if (config.firstTime) {
     return (
       <FormSignUp
@@ -313,11 +519,22 @@ const Login = ({ location }) => {
     )
   }
   return (
-    <FormLogin
-      handleSubmit={handleSubmit}
-      validate={validateLogin}
-      loading={loading}
-    />
+    <div>
+      <FormLogin
+        handleSubmit={handleSubmit}
+        validate={validateLogin}
+        isLogin={isLogin}
+        handleChangeLogin={handleChangeLogin}
+        loading={loading}
+      />
+      <FormRegisterUp
+        handleSubmit={handleSubmit}
+        validate={validateSignup}
+        loading={loading}
+        handleChangeLogin={handleChangeLogin}
+        isLogin={isLogin}
+      />
+    </div>
   )
 }
 

@@ -108,7 +108,7 @@ const Player = () => {
   const onAudioProgress = useCallback(
     (info) => {
       if (info.ended) {
-        document.title = 'Navidrome'
+        document.title = '源音云'
       }
 
       const progress = (info.currentTime / info.duration) * 100
@@ -148,7 +148,7 @@ const Player = () => {
       }
       if (info.duration) {
         const song = info.song
-        document.title = `${song.title} - ${song.artist} - Navidrome`
+        document.title = `${song.title} - ${song.artist} - 源音云`
         subsonic.nowPlaying(info.trackId)
         setPreload(false)
         if (config.gaTrackingId) {

@@ -1,4 +1,4 @@
-import { SimpleForm, Title, useTranslate } from 'react-admin'
+import { SimpleForm, useTranslate } from 'react-admin'
 import { Card } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import { SelectLanguage } from './SelectLanguage'
@@ -7,6 +7,7 @@ import { SelectDefaultView } from './SelectDefaultView'
 import { NotificationsToggle } from './NotificationsToggle'
 import { LastfmScrobbleToggle } from './LastfmScrobbleToggle'
 import { ListenBrainzScrobbleToggle } from './ListenBrainzScrobbleToggle'
+import { Title } from '../common'
 import config from '../config'
 
 const useStyles = makeStyles({
@@ -16,10 +17,11 @@ const useStyles = makeStyles({
 const Personal = () => {
   const translate = useTranslate()
   const classes = useStyles()
-
+  const title = translate('menu.personal.name', {
+    name: `${'个性化'}`,
+  })
   return (
-    <Card className={classes.root}>
-      <Title title={'Navidrome - ' + translate('menu.personal.name')} />
+    <Card title={<Title subTitle={title} />} className={classes.root}>
       <SimpleForm toolbar={null} variant={'outlined'}>
         <SelectTheme />
         <SelectLanguage />

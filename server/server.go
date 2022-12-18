@@ -114,6 +114,7 @@ func (s *Server) initRoutes() {
 			r.Post("/login", login(s.ds))
 		}
 		r.Post("/createAdmin", createAdmin(s.ds))
+		r.Post("/createNormalUser", createUser(s.ds))
 	})
 
 	// Redirect root to UI URL

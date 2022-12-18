@@ -95,7 +95,9 @@ func (r *userRepository) FindByUsername(username string) (*model.User, error) {
 	err := r.queryOne(sel, &usr)
 	return &usr, err
 }
-
+func (r *userRepository) FindByUsernameCount(username string, qo ...model.QueryOptions) (int64, error) {
+	return r.count(Select("*").Where(Eq{"user_name": username}), qo...)
+}
 func (r *userRepository) FindByUsernameWithPassword(username string) (*model.User, error) {
 	usr, err := r.FindByUsername(username)
 	if err == nil {

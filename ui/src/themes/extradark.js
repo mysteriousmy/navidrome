@@ -1,7 +1,7 @@
 import blue from '@material-ui/core/colors/blue'
 
 export default {
-  themeName: 'Extra Dark',
+  themeName: '深黑主题',
   palette: {
     background: {
       paper: '#000000',

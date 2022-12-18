@@ -26,10 +26,14 @@ function storeAuthenticationInfo(authInfo) {
 }
 
 const authProvider = {
-  login: ({ username, password }) => {
+  login: ({ username, password, urls }) => {
     let url = baseUrl('/auth/login')
+
     if (config.firstTime) {
       url = baseUrl('/auth/createAdmin')
+    }
+    if (urls) {
+      url = baseUrl(urls)
     }
     const request = new Request(url, {
       method: 'POST',
@@ -37,9 +41,10 @@ const authProvider = {
       headers: new Headers({ 'Content-Type': 'application/json' }),
     })
     return fetch(request)
-      .then((response) => {
+      .then(async (response) => {
         if (response.status < 200 || response.status >= 300) {
-          throw new Error(response.statusText)
+          let err = await response.json()
+          throw new Error(err.error)
         }
         return response.json()
       })
@@ -56,11 +61,12 @@ const authProvider = {
       .catch((error) => {
         if (
           error.message === 'Failed to fetch' ||
-          error.stack === 'TypeError: Failed to fetch'
+          error.stack === 'TypeError: Failed to fetch' ||
+          error.message === 'NetworkError when attempting to fetch resource.'
         ) {
-          throw new Error('errors.network_error')
+          throw new Error('网络错误，请检查网络或联系管理员')
         }
-
+        console.log(error.message)
         throw new Error(error)
       })
   },

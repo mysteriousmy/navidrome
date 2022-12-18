@@ -1,5 +1,5 @@
 export default {
-  themeName: 'Monokai',
+  themeName: '灰蓝主题',
   palette: {
     primary: {
       main: '#66d9ef',

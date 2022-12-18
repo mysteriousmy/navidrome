@@ -1,31 +1,31 @@
 export default {
-  themeName: '电子紫主题',
+  themeName: '网易云主题',
   palette: {
     primary: {
       light: '#f757ff',
-      dark: '#8800cb',
-      main: '#bf00ff',
+      dark: '#BD3B40',
+      main: '#BD3B40',
       contrastText: '#fff',
     },
     secondary: {
       light: '#bd4aff',
-      dark: '#530099',
-      main: '#8800cb',
+      dark: '#BD3B40',
+      main: '#25262b',
       contrastText: '#fff',
     },
     warn: {
       light: '#ffff82',
-      dark: '#c9bf07',
-      main: '#fff14e',
+      dark: '#BD3B40',
+      main: '#BD3B40',
       contrastText: '#000',
     },
     error: {
-      light: '#ff763a',
-      dark: '#c30000',
-      main: '#ff3f00',
+      light: '#BD3B40',
+      dark: '#BD3B40',
+      main: '#BD3B40',
       contrastText: '#000',
     },
-    type: 'dark',
+    type: 'light',
   },
   overrides: {
     MuiFormGroup: {
@@ -33,12 +33,23 @@ export default {
         color: 'white',
       },
     },
+
+    // MuiAppBar: {
+    //   colorSecondary: {
+    //     color: '#BD3B40!important',
+    //   },
+    // },
+    MuiListItemIcon: {
+      root: {
+        color: '#BD3B40!important',
+      },
+    },
     NDLogin: {
       systemNameLink: {
         color: '#fff',
       },
       welcome: {
-        color: '#eee',
+        color: 'grey',
       },
     },
     NDMobileArtistDetails: {
@@ -50,6 +61,6 @@ export default {
   },
   player: {
     theme: 'dark',
-    stylesheet: require('./electricPurple.css.js'),
+    stylesheet: require('./netease.css.js'),
   },
 }

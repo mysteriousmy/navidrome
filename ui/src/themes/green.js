@@ -1,7 +1,7 @@
 import green from '@material-ui/core/colors/green'
 
 export default {
-  themeName: 'Green',
+  themeName: '绿色主题',
   palette: {
     primary: {
       light: green['300'],

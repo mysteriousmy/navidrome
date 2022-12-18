@@ -59,7 +59,7 @@ const musicListActions = {
 }
 
 export default {
-  themeName: 'Spotify-ish',
+  themeName: 'Spotify',
   typography: {
     fontFamily: "system-ui, 'Helvetica Neue', Helvetica, Arial",
     h6: {

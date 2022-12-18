@@ -58,7 +58,7 @@ const musicListActions = {
 }
 
 export default {
-  themeName: 'Ligera',
+  themeName: '黑蓝主题',
   palette: {
     primary: {
       light: bLight['300'],

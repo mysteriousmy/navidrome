@@ -1,5 +1,5 @@
 export default {
-  themeName: 'Light',
+  themeName: '日间主题',
   palette: {
     secondary: {
       light: '#5f5fc4',

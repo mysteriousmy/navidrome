@@ -162,10 +162,15 @@
     },
     "ra": {
         "auth": {
-            "welcome1": "感谢您安装 Navidrome！",
+            "signUser": "注册用户",
+            "loginUser": "登录用户",
+            "uploadMusic": "上传音乐",
+            "downloadClient": "下载客户端",
+            "welcome1": "感谢您安装 源音云！",
             "welcome2": "开始使用前，请创建一个管理员账户",
             "confirmPassword": "确认密码",
             "buttonCreateAdmin": "创建管理员",
+            "buttonRegisterUser": "注册",
             "auth_check_error": "请登录访问更多内容",
             "user_menu": "配置",
             "username": "用户名",
@@ -303,7 +308,7 @@
     "message": {
         "note": "说明",
         "transcodingDisabled": "出于安全原因，从 Web 界面更改转码配置的功能已被禁用。要更改（编辑或新增）转码选项，请在启用 %{config} 选项的情况下重新启动服务器。",
-        "transcodingEnabled": "Navidrome 当前与 %{config} 一起使用，可以通过配置转码选项来执行任意命令，建议仅在配置转码选项时启用此功能。",
+        "transcodingEnabled": "源音云 当前与 %{config} 一起使用，可以通过配置转码选项来执行任意命令，建议仅在配置转码选项时启用此功能。",
         "songsAddedToPlaylist": "已添加一首歌到歌单 |||| 已添加 %{smart_count} 首歌到歌单",
         "noPlaylistsAvailable": "没有有效的歌单",
         "delete_user_title": "删除用户 %{name}",
@@ -386,7 +391,7 @@
         "serverDown": "服务器已离线"
     },
     "help": {
-        "title": "Navidrome 快捷键",
+        "title": "源音云 快捷键",
         "hotkeys": {
             "show_help": "显示此帮助",
             "toggle_menu": "显示/隐藏菜单侧栏",

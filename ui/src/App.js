@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import ReactGA from 'react-ga'
 import { Provider } from 'react-redux'
 import { createHashHistory } from 'history'
-import { Admin as RAAdmin, Resource } from 'react-admin'
+import { Admin as RAAdmin, Resource, useLocale } from 'react-admin'
 import { HotKeys } from 'react-hotkeys'
 import dataProvider from './dataProvider'
 import authProvider from './authProvider'
@@ -32,7 +32,6 @@ import config from './config'
 import { setDispatch, startEventStream, stopEventStream } from './eventStream'
 import { keyMap } from './hotkeys'
 import useChangeThemeColor from './useChangeThemeColor'
-
 const history = createHashHistory()
 
 if (config.gaTrackingId) {

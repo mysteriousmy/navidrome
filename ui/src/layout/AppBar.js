@@ -7,12 +7,10 @@ import {
   getResources,
 } from 'react-admin'
 import { useSelector } from 'react-redux'
-import { makeStyles, MenuItem, ListItemIcon, Divider } from '@material-ui/core'
+import { makeStyles, Divider } from '@material-ui/core'
 import ViewListIcon from '@material-ui/icons/ViewList'
-import InfoIcon from '@material-ui/icons/Info'
 import PersonIcon from '@material-ui/icons/Person'
 import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount'
-import { AboutDialog } from '../dialogs'
 import PersonalMenu from './PersonalMenu'
 import ActivityPanel from './ActivityPanel'
 import UserMenu from './UserMenu'
@@ -32,32 +30,6 @@ const useStyles = makeStyles(
     name: 'NDAppBar',
   }
 )
-
-const AboutMenuItem = forwardRef(({ onClick, ...rest }, ref) => {
-  const classes = useStyles(rest)
-  const translate = useTranslate()
-  const [open, setOpen] = React.useState(false)
-
-  const handleOpen = () => {
-    setOpen(true)
-  }
-  const handleClose = () => {
-    onClick && onClick()
-    setOpen(false)
-  }
-  const label = translate('menu.about')
-  return (
-    <>
-      <MenuItem ref={ref} onClick={handleOpen} className={classes.root}>
-        <ListItemIcon className={classes.icon}>
-          <InfoIcon titleAccess={label} />
-        </ListItemIcon>
-        {label}
-      </MenuItem>
-      <AboutDialog onClose={handleClose} open={open} />
-    </>
-  )
-})
 
 const settingsResources = (resource) =>
   resource.name !== 'user' &&
@@ -125,7 +97,6 @@ const CustomUserMenu = ({ onClick, ...rest }) => {
           .filter(settingsResources)
           .map((r) => renderSettingsMenuItemLink(r))}
         <Divider />
-        <AboutMenuItem />
       </UserMenu>
     </>
   )
