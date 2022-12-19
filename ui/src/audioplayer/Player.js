@@ -210,7 +210,7 @@ const Player = () => {
   }, [dispatch])
 
   if (!visible) {
-    document.title = 'Navidrome'
+    document.title = '源音云'
   }
 
   const handlers = useMemo(

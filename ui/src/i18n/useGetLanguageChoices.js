@@ -9,7 +9,7 @@ const useGetLanguageChoices = () => {
     {}
   )
 
-  const choices = [{ id: 'en', name: 'English' }]
+  const choices = [{ id: 'zh-Hans', name: '简体中文' }]
   if (loaded) {
     ids.forEach((id) => choices.push({ id: id, name: data[id].name }))
   }

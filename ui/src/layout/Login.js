@@ -9,6 +9,7 @@ import CardActions from '@material-ui/core/CardActions'
 import CircularProgress from '@material-ui/core/CircularProgress'
 import TextField from '@material-ui/core/TextField'
 import { ThemeProvider, makeStyles } from '@material-ui/core/styles'
+import defaultConfig from '../config'
 import {
   createMuiTheme,
   useLogin,
@@ -85,7 +86,7 @@ const useStyles = makeStyles(
   }),
   { name: 'NDLogin' }
 )
-
+console.log(defaultConfig.otherUrl)
 const renderInput = ({
   meta: { touched, error } = {},
   input: { ...inputProps },
@@ -198,7 +199,7 @@ const FormLogin = ({
                 <Button
                   variant="contained"
                   type="button"
-                  onClick={() => (window.window.href = 'http://musicup.hy.com')}
+                  onClick={() => window.open(defaultConfig.otherUrl)}
                   color="primary"
                   disabled={loading}
                   className={classes.button}
@@ -210,7 +211,7 @@ const FormLogin = ({
                   variant="contained"
                   type="button"
                   onClick={() =>
-                    (window.location.href = 'http://musicup.hy.com/源音云.exe')
+                    window.open(`${defaultConfig.otherUrl}源音云.exe`)
                   }
                   color="primary"
                   disabled={loading}
@@ -333,9 +334,7 @@ const FormRegisterUp = ({
                 <Button
                   variant="contained"
                   type="button"
-                  onClick={() =>
-                    (window.location.href = 'http://musicup.hy.com')
-                  }
+                  onClick={() => window.open(defaultConfig.otherUrl)}
                   color="primary"
                   disabled={loading}
                   className={classes.button}
@@ -347,7 +346,7 @@ const FormRegisterUp = ({
                   variant="contained"
                   type="button"
                   onClick={() =>
-                    (window.location.href = 'http://musicup.hy.com/源音云.exe')
+                    window.open(`${defaultConfig.otherUrl}/源音云.exe`)
                   }
                   color="primary"
                   disabled={loading}

@@ -1,12 +1,30 @@
-import blue from '@material-ui/core/colors/blue'
-
 export default {
-  themeName: '默认主题',
+  themeName: '网易云主题',
   palette: {
     primary: {
-      main: '#90caf9',
+      light: '#f757ff',
+      dark: '#BD3B40',
+      main: '#BD3B40',
+      contrastText: '#fff',
     },
-    secondary: blue,
+    secondary: {
+      light: '#bd4aff',
+      dark: '#BD3B40',
+      main: '#25262b',
+      contrastText: '#fff',
+    },
+    warn: {
+      light: '#ffff82',
+      dark: '#BD3B40',
+      main: '#BD3B40',
+      contrastText: '#000',
+    },
+    error: {
+      light: '#BD3B40',
+      dark: '#BD3B40',
+      main: '#BD3B40',
+      contrastText: '#000',
+    },
     type: 'light',
   },
   overrides: {
@@ -15,21 +33,31 @@ export default {
         color: 'white',
       },
     },
+
+    // MuiAppBar: {
+    //   colorSecondary: {
+    //     color: '#BD3B40!important',
+    //   },
+    // },
+    MuiListItemIcon: {
+      root: {
+        color: '#BD3B40!important',
+      },
+    },
+    NDAudioPlayer: {
+      songTitle: {
+        color: '#fff',
+      },
+      audioTitle: {
+        color: '#fff',
+      },
+    },
     NDLogin: {
       systemNameLink: {
-        color: '#0085ff',
+        color: '#fff',
       },
-      icon: {},
       welcome: {
-        color: '#eee',
-      },
-      card: {
-        minWidth: 300,
-        backgroundColor: '#424242ed',
-      },
-      avatar: {},
-      button: {
-        boxShadow: '3px 3px 5px #000000a3',
+        color: 'grey',
       },
     },
     NDMobileArtistDetails: {
@@ -41,6 +69,6 @@ export default {
   },
   player: {
     theme: 'dark',
-    stylesheet: require('./dark.css.js'),
+    stylesheet: require('./netease.css.js'),
   },
 }

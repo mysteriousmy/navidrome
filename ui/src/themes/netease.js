@@ -1,30 +1,11 @@
+import blue from '@material-ui/core/colors/blue'
 export default {
-  themeName: '网易云主题',
+  themeName: '默认主题',
   palette: {
     primary: {
-      light: '#f757ff',
-      dark: '#BD3B40',
-      main: '#BD3B40',
-      contrastText: '#fff',
+      main: '#90caf9',
     },
-    secondary: {
-      light: '#bd4aff',
-      dark: '#BD3B40',
-      main: '#25262b',
-      contrastText: '#fff',
-    },
-    warn: {
-      light: '#ffff82',
-      dark: '#BD3B40',
-      main: '#BD3B40',
-      contrastText: '#000',
-    },
-    error: {
-      light: '#BD3B40',
-      dark: '#BD3B40',
-      main: '#BD3B40',
-      contrastText: '#000',
-    },
+    secondary: blue,
     type: 'light',
   },
   overrides: {
@@ -33,23 +14,21 @@ export default {
         color: 'white',
       },
     },
-
-    // MuiAppBar: {
-    //   colorSecondary: {
-    //     color: '#BD3B40!important',
-    //   },
-    // },
-    MuiListItemIcon: {
-      root: {
-        color: '#BD3B40!important',
-      },
-    },
     NDLogin: {
       systemNameLink: {
-        color: '#fff',
+        color: '#0085ff',
       },
+      icon: {},
       welcome: {
-        color: 'grey',
+        color: '#eee',
+      },
+      card: {
+        minWidth: 300,
+        backgroundColor: '#424242ed',
+      },
+      avatar: {},
+      button: {
+        boxShadow: '3px 3px 5px #000000a3',
       },
     },
     NDMobileArtistDetails: {
@@ -61,6 +40,6 @@ export default {
   },
   player: {
     theme: 'dark',
-    stylesheet: require('./netease.css.js'),
+    stylesheet: require('./dark.css.js'),
   },
 }
